@@ -19,6 +19,13 @@ const ThankYouPage = () => {
     window.addEventListener('popstate', () => {
       window.history.pushState(null, '', window.location.href);
     });
+
+    // Auto-redirect to home page after 2 seconds
+    const redirectTimer = setTimeout(() => {
+      navigate('/');
+    }, 2000);
+
+    return () => clearTimeout(redirectTimer);
   }, [isSubmitted, navigate]);
 
   return (
@@ -160,7 +167,7 @@ const ThankYouPage = () => {
           fontSize: '14px'
         }}>
           <p style={{ margin: 0 }}>
-            You can now close this window
+            Redirecting to home page in 2 seconds...
           </p>
         </div>
       </motion.div>
