@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { CheckCircle2, User, IdCard } from 'lucide-react';
 import { useVote } from '../context/VoteContext';
 
 const ThankYouPage = () => {
@@ -18,126 +19,156 @@ const ThankYouPage = () => {
     window.addEventListener('popstate', () => {
       window.history.pushState(null, '', window.location.href);
     });
+
+    // Auto-redirect to home page after 2 seconds
+    const redirectTimer = setTimeout(() => {
+      navigate('/');
+    }, 2000);
+
+    return () => clearTimeout(redirectTimer);
   }, [isSubmitted, navigate]);
 
-  const checkmarkVariants = {
-    hidden: { pathLength: 0, opacity: 0 },
-    visible: {
-      pathLength: 1,
-      opacity: 1,
-      transition: { duration: 0.8, ease: 'easeInOut' },
-    },
-  };
-
-  const circleVariants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: { duration: 0.5, ease: 'easeOut' },
-    },
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-vgu-blue to-blue-600 flex items-center justify-center px-4">
+    <div style={{
+      minHeight: '100vh',
+      background: '#F7F7F7',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '40px 20px'
+    }}>
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="bg-white rounded-2xl shadow-2xl p-12 max-w-2xl w-full text-center"
+        transition={{ duration: 0.4 }}
+        style={{
+          width: '100%',
+          maxWidth: '540px'
+        }}
       >
-        {/* Animated Check Mark */}
-        <div className="flex justify-center mb-8">
-          <motion.div
-            variants={circleVariants}
-            initial="hidden"
-            animate="visible"
-            className="relative"
-          >
-            <svg
-              width="120"
-              height="120"
-              viewBox="0 0 120 120"
-              className="drop-shadow-lg"
+        {/* Main Card */}
+        <div style={{
+          background: 'white',
+          borderRadius: '12px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
+          border: '1px solid #E5E5E5',
+          overflow: 'hidden',
+          textAlign: 'center'
+        }}>
+          {/* Success Icon */}
+          <div style={{
+            padding: '48px 32px 32px',
+            borderBottom: '1px solid #EBEBEB'
+          }}>
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '80px',
+                height: '80px',
+                borderRadius: '50%',
+                background: '#00A699',
+                marginBottom: '24px'
+              }}
             >
-              {/* Circle Background */}
-              <motion.circle
-                cx="60"
-                cy="60"
-                r="54"
-                fill="#004AAD"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-              />
-              {/* Check Mark */}
-              <motion.path
-                d="M 30 60 L 50 80 L 90 40"
-                fill="none"
-                stroke="#FFD700"
-                strokeWidth="8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                variants={checkmarkVariants}
-                initial="hidden"
-                animate="visible"
-              />
-            </svg>
-          </motion.div>
-        </div>
+              <CheckCircle2 size={48} color="white" strokeWidth={2.5} />
+            </motion.div>
 
-        {/* Success Message */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-        >
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            Thank You for Voting!
-          </h1>
-          <p className="text-xl text-gray-600 mb-2">
-            Your vote has been recorded successfully.
-          </p>
-          <p className="text-gray-500 mb-8">
-            Thank you for participating in the VGU Student Council Elections 2025.
-          </p>
+            <h1 style={{
+              fontSize: '28px',
+              fontWeight: '600',
+              color: '#222222',
+              marginBottom: '12px',
+              letterSpacing: '-0.02em'
+            }}>
+              Vote submitted successfully
+            </h1>
+            <p style={{
+              fontSize: '16px',
+              color: '#717171',
+              lineHeight: '1.5',
+              margin: 0
+            }}>
+              Thank you for participating in the VGU Student Council Elections 2025
+            </p>
+          </div>
 
           {/* Voter Info */}
-          <div className="bg-blue-50 rounded-lg p-6 mb-8">
-            <p className="text-gray-700">
-              <span className="font-semibold">Voter:</span> {voteData.name}
-            </p>
-            <p className="text-gray-700">
-              <span className="font-semibold">ERP:</span> {voteData.erp_number}
-            </p>
-          </div>
+          <div style={{ padding: '32px' }}>
+            <div style={{
+              padding: '20px',
+              background: '#F7F7F7',
+              borderRadius: '8px',
+              border: '1px solid #EBEBEB',
+              marginBottom: '24px'
+            }}>
+              <h3 style={{
+                fontSize: '12px',
+                fontWeight: '600',
+                color: '#717171',
+                marginBottom: '16px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em'
+              }}>
+                Confirmation Details
+              </h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: 'center' }}>
+                  <User size={18} color="#717171" />
+                  <span style={{ fontSize: '15px', color: '#222222', fontWeight: '500' }}>{voteData.name}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: 'center' }}>
+                  <IdCard size={18} color="#717171" />
+                  <span style={{ fontSize: '15px', color: '#222222', fontWeight: '500' }}>{voteData.erp_number}</span>
+                </div>
+              </div>
+            </div>
 
-          {/* Confetti Effect Text */}
-          <div className="space-y-2">
-            <p className="text-sm text-gray-500">
-              Your vote is confidential and cannot be changed.
-            </p>
-            <p className="text-sm text-vgu-blue font-semibold">
-              Results will be announced soon!
-            </p>
+            {/* Info Notes */}
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px'
+            }}>
+              <div style={{
+                padding: '12px 16px',
+                background: '#F7F7F7',
+                borderRadius: '8px',
+                fontSize: '14px',
+                color: '#717171',
+                lineHeight: '1.5'
+              }}>
+                🔒 Your vote has been recorded and is confidential
+              </div>
+              <div style={{
+                padding: '12px 16px',
+                background: '#F7F7F7',
+                borderRadius: '8px',
+                fontSize: '14px',
+                color: '#717171',
+                lineHeight: '1.5'
+              }}>
+                📊 Results will be announced soon
+              </div>
+            </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Decorative Elements */}
-        <div className="mt-8 flex justify-center gap-2">
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              initial={{ scale: 0, rotate: 0 }}
-              animate={{ scale: 1, rotate: 360 }}
-              transition={{
-                delay: 0.8 + i * 0.1,
-                duration: 0.5,
-                ease: 'easeOut',
-              }}
-              className="w-3 h-3 bg-vgu-gold rounded-full"
-            />
-          ))}
+        {/* Footer Message */}
+        <div style={{
+          marginTop: '24px',
+          textAlign: 'center',
+          color: '#717171',
+          fontSize: '14px'
+        }}>
+          <p style={{ margin: 0 }}>
+            Redirecting to home page in 2 seconds...
+          </p>
         </div>
       </motion.div>
     </div>

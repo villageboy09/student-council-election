@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { AlertCircle, ArrowRight } from 'lucide-react';
 import { useVote } from '../context/VoteContext';
 import { supabase } from '../lib/supabaseClient';
 import Header from '../components/Header';
@@ -13,9 +14,7 @@ const VoterEntry = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // ERP validation regex: VGU followed by 5-6 digits
   const erpPattern = /^VGU\d{5,6}$/i;
-
   const isValidErp = erpPattern.test(erpNumber);
   const isFormValid = name.trim() && isValidErp;
 
@@ -25,7 +24,6 @@ const VoterEntry = () => {
     setLoading(true);
 
     try {
-      // Check if ERP already exists in database
       const { data, error: dbError } = await supabase
         .from('votes')
         .select('erp_number')
@@ -33,7 +31,6 @@ const VoterEntry = () => {
         .single();
 
       if (dbError && dbError.code !== 'PGRST116') {
-        // PGRST116 means no rows found, which is what we want
         throw dbError;
       }
 
@@ -43,7 +40,6 @@ const VoterEntry = () => {
         return;
       }
 
-      // Store voter data and proceed
       updateVoteData('name', name.trim());
       updateVoteData('erp_number', erpNumber.toUpperCase());
       navigate('/vote/president');
@@ -56,99 +52,272 @@ const VoterEntry = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div style={{
+      minHeight: '100vh',
+      background: '#F7F7F7',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+    }}>
       <Header />
-      <div className="max-w-2xl mx-auto px-4 py-12">
+
+      <div style={{
+        maxWidth: '480px',
+        margin: '0 auto',
+        padding: '40px 20px'
+      }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl shadow-lg p-8"
+          transition={{ duration: 0.4 }}
         >
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">
-              Welcome to VGU Student Council Elections
-            </h2>
-            <p className="text-gray-600">
-              Please enter your details to begin voting
-            </p>
+          {/* Main Card */}
+          <div style={{
+            background: 'white',
+            borderRadius: '12px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
+            border: '1px solid #E5E5E5',
+            overflow: 'hidden'
+          }}>
+            {/* Header Section */}
+            <div style={{
+              padding: '32px 32px 24px',
+              borderBottom: '1px solid #EBEBEB'
+            }}>
+              <h1 style={{
+                fontSize: '26px',
+                fontWeight: '600',
+                color: '#222222',
+                marginBottom: '8px',
+                letterSpacing: '-0.02em'
+              }}>
+                Welcome to VGU Elections
+              </h1>
+              <p style={{
+                fontSize: '16px',
+                color: '#717171',
+                lineHeight: '1.5',
+                margin: 0
+              }}>
+                Please enter your details to begin voting
+              </p>
+            </div>
+
+            {/* Form Content */}
+            <div style={{ padding: '32px' }}>
+              <form onSubmit={handleSubmit}>
+                {/* Name Input */}
+                <div style={{ marginBottom: '24px' }}>
+                  <label
+                    htmlFor="name"
+                    style={{
+                      display: 'block',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      color: '#222222',
+                      marginBottom: '8px'
+                    }}
+                  >
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter your full name"
+                    required
+                    style={{
+                      width: '100%',
+                      padding: '12px 16px',
+                      fontSize: '16px',
+                      borderRadius: '8px',
+                      border: '1px solid #B0B0B0',
+                      outline: 'none',
+                      background: 'white',
+                      transition: 'all 0.2s',
+                      boxSizing: 'border-box'
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = '#222222';
+                      e.target.style.boxShadow = '0 0 0 2px rgba(34,34,34,0.1)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = '#B0B0B0';
+                      e.target.style.boxShadow = 'none';
+                    }}
+                  />
+                </div>
+
+                {/* ERP Input */}
+                <div style={{ marginBottom: '24px' }}>
+                  <label
+                    htmlFor="erp"
+                    style={{
+                      display: 'block',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      color: '#222222',
+                      marginBottom: '8px'
+                    }}
+                  >
+                    ERP Number
+                  </label>
+                  <input
+                    type="text"
+                    id="erp"
+                    value={erpNumber}
+                    onChange={(e) => setErpNumber(e.target.value.toUpperCase())}
+                    placeholder="VGU12345"
+                    required
+                    style={{
+                      width: '100%',
+                      padding: '12px 16px',
+                      fontSize: '16px',
+                      borderRadius: '8px',
+                      border: erpNumber && !isValidErp ? '1px solid #C13515' : '1px solid #B0B0B0',
+                      outline: 'none',
+                      background: 'white',
+                      transition: 'all 0.2s',
+                      boxSizing: 'border-box'
+                    }}
+                    onFocus={(e) => {
+                      if (!erpNumber || isValidErp) {
+                        e.target.style.borderColor = '#222222';
+                        e.target.style.boxShadow = '0 0 0 2px rgba(34,34,34,0.1)';
+                      }
+                    }}
+                    onBlur={(e) => {
+                      if (!erpNumber || isValidErp) {
+                        e.target.style.borderColor = '#B0B0B0';
+                        e.target.style.boxShadow = 'none';
+                      }
+                    }}
+                  />
+                  {erpNumber && !isValidErp && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      style={{
+                        marginTop: '8px',
+                        fontSize: '14px',
+                        color: '#C13515',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px'
+                      }}
+                    >
+                      <AlertCircle size={14} />
+                      Must be VGU followed by 5-6 digits (e.g., VGU12345)
+                    </motion.p>
+                  )}
+                </div>
+
+                {/* Error Alert */}
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    style={{
+                      marginBottom: '24px',
+                      padding: '12px 16px',
+                      borderRadius: '8px',
+                      background: '#FFF4F1',
+                      border: '1px solid #F0D9D4',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px'
+                    }}
+                  >
+                    <AlertCircle size={18} color="#C13515" />
+                    <span style={{ color: '#C13515', fontSize: '14px', fontWeight: '500' }}>{error}</span>
+                  </motion.div>
+                )}
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={!isFormValid || loading}
+                  style={{
+                    width: '100%',
+                    padding: '14px',
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    borderRadius: '8px',
+                    border: 'none',
+                    background: isFormValid && !loading ? '#222222' : '#DDDDDD',
+                    color: isFormValid && !loading ? 'white' : '#999999',
+                    cursor: isFormValid && !loading ? 'pointer' : 'not-allowed',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    transition: 'all 0.2s',
+                    boxSizing: 'border-box'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (isFormValid && !loading) {
+                      e.target.style.background = '#000000';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (isFormValid && !loading) {
+                      e.target.style.background = '#222222';
+                    }
+                  }}
+                >
+                  {loading ? (
+                    <>
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                        style={{
+                          width: '16px',
+                          height: '16px',
+                          border: '2px solid rgba(255,255,255,0.3)',
+                          borderTopColor: 'white',
+                          borderRadius: '50%'
+                        }}
+                      />
+                      Checking...
+                    </>
+                  ) : (
+                    <>
+                      Continue
+                      <ArrowRight size={20} />
+                    </>
+                  )}
+                </button>
+              </form>
+
+              {/* Footer Info */}
+              <div style={{
+                marginTop: '24px',
+                padding: '16px',
+                background: '#F7F7F7',
+                borderRadius: '8px',
+                textAlign: 'center'
+              }}>
+                <p style={{
+                  margin: 0,
+                  color: '#717171',
+                  fontSize: '14px',
+                  lineHeight: '1.5'
+                }}>
+                  One vote per student • Your vote is confidential
+                </p>
+              </div>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name Input */}
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                Full Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vgu-blue focus:border-transparent outline-none transition"
-                placeholder="Enter your full name"
-                required
-              />
-            </div>
-
-            {/* ERP Number Input */}
-            <div>
-              <label
-                htmlFor="erp"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                ERP Number <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="erp"
-                value={erpNumber}
-                onChange={(e) => setErpNumber(e.target.value.toUpperCase())}
-                className={`w-full px-4 py-3 border rounded-lg outline-none transition ${
-                  erpNumber && !isValidErp
-                    ? 'border-red-500 focus:ring-2 focus:ring-red-500'
-                    : 'border-gray-300 focus:ring-2 focus:ring-vgu-blue focus:border-transparent'
-                }`}
-                placeholder="VGU12345"
-                required
-              />
-              {erpNumber && !isValidErp && (
-                <p className="mt-2 text-sm text-red-600">
-                  Invalid ERP format. Must be VGU followed by 5-6 digits (e.g.,
-                  VGU12345)
-                </p>
-              )}
-            </div>
-
-            {/* Error Message */}
-            {error && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg"
-              >
-                {error}
-              </motion.div>
-            )}
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={!isFormValid || loading}
-              className={`w-full py-4 rounded-lg font-semibold text-white transition-all ${
-                isFormValid && !loading
-                  ? 'bg-vgu-blue hover:bg-blue-700 cursor-pointer'
-                  : 'bg-gray-400 cursor-not-allowed'
-              }`}
-            >
-              {loading ? 'Checking...' : 'Proceed to Vote'}
-            </button>
-          </form>
-
-          <div className="mt-6 text-center text-sm text-gray-500">
-            <p>One vote per student. Your vote is confidential.</p>
+          {/* Additional Info */}
+          <div style={{
+            marginTop: '24px',
+            textAlign: 'center',
+            color: '#717171',
+            fontSize: '14px'
+          }}>
+            <p style={{ margin: 0 }}>
+              By continuing, you agree to participate in the VGU Student Council Elections 2025
+            </p>
           </div>
         </motion.div>
       </div>
