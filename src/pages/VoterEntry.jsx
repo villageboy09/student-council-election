@@ -63,48 +63,18 @@ const VoterEntry = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* VERY OBVIOUS TEST BANNER - YOU SHOULD SEE THIS! */}
-      <div style={{
-        backgroundColor: '#FF1493',
-        color: 'white',
-        padding: '20px',
-        textAlign: 'center',
-        fontSize: '28px',
-        fontWeight: 'bold',
-        border: '5px solid #FFD700',
-        margin: '10px',
-        borderRadius: '10px',
-        boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
-      }}>
-        🎉 UPDATED UI VERSION - IF YOU SEE THIS, THE CHANGES ARE WORKING! 🎉
-      </div>
-
       <Header />
       <div className="container max-w-2xl mx-auto px-4 py-6 sm:py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <Card className="shadow-lg" style={{
-            border: '4px solid #00FF00',
-            backgroundColor: '#f0f9ff'
-          }}>
-            <CardHeader className="space-y-1 text-center pb-6" style={{
-              backgroundColor: '#004AAD',
-              color: 'white',
-              borderRadius: '8px 8px 0 0'
-            }}>
-              <CardTitle className="text-2xl sm:text-3xl font-bold" style={{
-                color: 'white',
-                fontSize: '36px'
-              }}>
-                ✨ Welcome to VGU Student Council Elections ✨
+          <Card className="shadow-lg border-2">
+            <CardHeader className="space-y-1 text-center pb-6">
+              <CardTitle className="text-2xl sm:text-3xl font-bold text-vgu-blue">
+                Welcome to VGU Student Council Elections
               </CardTitle>
-              <CardDescription className="text-base" style={{
-                color: '#FFD700',
-                fontSize: '18px',
-                fontWeight: 'bold'
-              }}>
+              <CardDescription className="text-base">
                 Please enter your details to begin voting
               </CardDescription>
             </CardHeader>
@@ -170,19 +140,8 @@ const VoterEntry = () => {
                   disabled={!isFormValid || loading}
                   className="w-full h-12 text-base bg-vgu-blue hover:bg-vgu-blue/90"
                   size="lg"
-                  style={{
-                    backgroundColor: '#FF4500',
-                    color: 'white',
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    padding: '20px',
-                    borderRadius: '15px',
-                    border: '4px solid #FFD700',
-                    cursor: 'pointer',
-                    boxShadow: '0 8px 20px rgba(255,69,0,0.4)'
-                  }}
                 >
-                  {loading ? '⏳ Checking...' : '🚀 PROCEED TO VOTE - UPDATED UI! 🚀'}
+                  {loading ? 'Checking...' : 'Proceed to Vote'}
                 </Button>
               </form>
             </CardContent>
