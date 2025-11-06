@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useVote } from '../context/VoteContext';
 import { supabase } from '../lib/supabaseClient';
 import Header from '../components/Header';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
+import { Alert, AlertDescription } from '../components/ui/alert';
 
 const VoterEntry = () => {
   const navigate = useNavigate();
@@ -56,100 +62,97 @@ const VoterEntry = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <Header />
-      <div className="max-w-2xl mx-auto px-4 py-12">
+      <div className="container max-w-2xl mx-auto px-4 py-6 sm:py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl shadow-lg p-8"
         >
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">
-              Welcome to VGU Student Council Elections
-            </h2>
-            <p className="text-gray-600">
-              Please enter your details to begin voting
-            </p>
-          </div>
+          <Card className="shadow-lg">
+            <CardHeader className="space-y-1 text-center pb-6">
+              <CardTitle className="text-2xl sm:text-3xl font-bold text-vgu-blue">
+                Welcome to VGU Student Council Elections
+              </CardTitle>
+              <CardDescription className="text-base">
+                Please enter your details to begin voting
+              </CardDescription>
+            </CardHeader>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name Input */}
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                Full Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vgu-blue focus:border-transparent outline-none transition"
-                placeholder="Enter your full name"
-                required
-              />
-            </div>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Name Input */}
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-base">
+                    Full Name <span className="text-destructive">*</span>
+                  </Label>
+                  <Input
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter your full name"
+                    className="h-11"
+                    required
+                  />
+                </div>
 
-            {/* ERP Number Input */}
-            <div>
-              <label
-                htmlFor="erp"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                ERP Number <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="erp"
-                value={erpNumber}
-                onChange={(e) => setErpNumber(e.target.value.toUpperCase())}
-                className={`w-full px-4 py-3 border rounded-lg outline-none transition ${
-                  erpNumber && !isValidErp
-                    ? 'border-red-500 focus:ring-2 focus:ring-red-500'
-                    : 'border-gray-300 focus:ring-2 focus:ring-vgu-blue focus:border-transparent'
-                }`}
-                placeholder="VGU12345"
-                required
-              />
-              {erpNumber && !isValidErp && (
-                <p className="mt-2 text-sm text-red-600">
-                  Invalid ERP format. Must be VGU followed by 5-6 digits (e.g.,
-                  VGU12345)
-                </p>
-              )}
-            </div>
+                {/* ERP Number Input */}
+                <div className="space-y-2">
+                  <Label htmlFor="erp" className="text-base">
+                    ERP Number <span className="text-destructive">*</span>
+                  </Label>
+                  <Input
+                    type="text"
+                    id="erp"
+                    value={erpNumber}
+                    onChange={(e) => setErpNumber(e.target.value.toUpperCase())}
+                    placeholder="VGU12345"
+                    className={`h-11 ${
+                      erpNumber && !isValidErp ? 'border-destructive' : ''
+                    }`}
+                    required
+                  />
+                  {erpNumber && !isValidErp && (
+                    <p className="text-sm text-destructive flex items-center gap-1">
+                      <AlertCircle className="h-4 w-4" />
+                      Invalid ERP format. Must be VGU followed by 5-6 digits (e.g., VGU12345)
+                    </p>
+                  )}
+                </div>
 
-            {/* Error Message */}
-            {error && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg"
-              >
-                {error}
-              </motion.div>
-            )}
+                {/* Error Message */}
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                  >
+                    <Alert variant="destructive">
+                      <AlertCircle className="h-4 w-4" />
+                      <AlertDescription>{error}</AlertDescription>
+                    </Alert>
+                  </motion.div>
+                )}
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={!isFormValid || loading}
-              className={`w-full py-4 rounded-lg font-semibold text-white transition-all ${
-                isFormValid && !loading
-                  ? 'bg-vgu-blue hover:bg-blue-700 cursor-pointer'
-                  : 'bg-gray-400 cursor-not-allowed'
-              }`}
-            >
-              {loading ? 'Checking...' : 'Proceed to Vote'}
-            </button>
-          </form>
+                {/* Submit Button */}
+                <Button
+                  type="submit"
+                  disabled={!isFormValid || loading}
+                  className="w-full h-12 text-base bg-vgu-blue hover:bg-vgu-blue/90"
+                  size="lg"
+                >
+                  {loading ? 'Checking...' : 'Proceed to Vote'}
+                </Button>
+              </form>
+            </CardContent>
 
-          <div className="mt-6 text-center text-sm text-gray-500">
-            <p>One vote per student. Your vote is confidential.</p>
-          </div>
+            <CardFooter className="flex justify-center">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <CheckCircle2 className="h-4 w-4" />
+                <p>One vote per student. Your vote is confidential.</p>
+              </div>
+            </CardFooter>
+          </Card>
         </motion.div>
       </div>
     </div>

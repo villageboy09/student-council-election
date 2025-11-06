@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useVote } from '../context/VoteContext';
 import { candidates, positionLabels } from '../data/candidates';
 import Header from '../components/Header';
 import CandidateCard from '../components/CandidateCard';
+import { Button } from '../components/ui/button';
+import { Progress } from '../components/ui/progress';
+import { Badge } from '../components/ui/badge';
 
 const SelectionPage = () => {
   const { position } = useParams();
@@ -63,41 +67,38 @@ const SelectionPage = () => {
   const progress = ((currentIndex + 1) / positionFlow.length) * 100;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <Header />
 
       {/* Progress Bar */}
-      <div className="max-w-7xl mx-auto px-4 mb-8">
-        <div className="bg-gray-200 h-2 rounded-full overflow-hidden">
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.5 }}
-            className="h-full bg-vgu-blue"
-          />
+      <div className="container max-w-7xl mx-auto px-4 mb-6 sm:mb-8">
+        <div className="space-y-2">
+          <Progress value={progress} className="h-2 sm:h-3" />
+          <div className="flex items-center justify-center gap-2">
+            <Badge variant="secondary" className="text-xs sm:text-sm">
+              Step {currentIndex + 1} of {positionFlow.length}
+            </Badge>
+          </div>
         </div>
-        <p className="text-center mt-2 text-sm text-gray-600">
-          Step {currentIndex + 1} of {positionFlow.length}
-        </p>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pb-12">
+      <div className="container max-w-7xl mx-auto px-4 pb-8 sm:pb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
           {/* Title */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-vgu-blue mb-2">
               Select Your {positionLabels[position]}
             </h2>
-            <p className="text-gray-600">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Choose one candidate from the options below
             </p>
           </div>
 
           {/* Candidates Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
             {positionCandidates.map((candidate) => (
               <CandidateCard
                 key={candidate.id}
@@ -109,24 +110,25 @@ const SelectionPage = () => {
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex gap-4 justify-between max-w-2xl mx-auto">
-            <button
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-2xl mx-auto">
+            <Button
               onClick={handleBack}
-              className="px-8 py-3 border-2 border-vgu-blue text-vgu-blue rounded-lg font-semibold hover:bg-vgu-blue hover:text-white transition-all"
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto border-vgu-blue text-vgu-blue hover:bg-vgu-blue hover:text-white"
             >
+              <ChevronLeft className="h-4 w-4 mr-2" />
               Back
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={handleNext}
               disabled={!selectedCandidate}
-              className={`px-8 py-3 rounded-lg font-semibold transition-all ${
-                selectedCandidate
-                  ? 'bg-vgu-blue text-white hover:bg-blue-700'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
+              size="lg"
+              className="w-full sm:flex-1 bg-vgu-blue hover:bg-vgu-blue/90"
             >
               {isLastPosition ? 'Review & Submit' : 'Next'}
-            </button>
+              {!isLastPosition && <ChevronRight className="h-4 w-4 ml-2" />}
+            </Button>
           </div>
         </motion.div>
       </div>
