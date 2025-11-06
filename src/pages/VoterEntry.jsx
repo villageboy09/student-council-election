@@ -1,15 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { AlertCircle, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react';
+import { AlertCircle, ArrowRight } from 'lucide-react';
 import { useVote } from '../context/VoteContext';
 import { supabase } from '../lib/supabaseClient';
 import Header from '../components/Header';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { Label } from '../components/ui/label';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
-import { Alert, AlertDescription } from '../components/ui/alert';
 
 const VoterEntry = () => {
   const navigate = useNavigate();
@@ -59,112 +54,71 @@ const VoterEntry = () => {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      padding: '20px'
+      background: '#F7F7F7',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
     }}>
       <Header />
 
-      {/* Floating particles effect */}
-      <div style={{ position: 'relative' }}>
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              delay: i * 0.4,
-            }}
-            style={{
-              position: 'absolute',
-              width: '20px',
-              height: '20px',
-              borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.3)',
-              left: `${20 + i * 15}%`,
-              top: '50px',
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="container max-w-2xl mx-auto px-4 py-6 sm:py-12">
+      <div style={{
+        maxWidth: '480px',
+        margin: '0 auto',
+        padding: '40px 20px'
+      }}>
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
         >
-          {/* Main Card with Glassmorphism */}
+          {/* Main Card */}
           <div style={{
-            background: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '24px',
-            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
-            border: '2px solid rgba(255, 255, 255, 0.5)',
+            background: 'white',
+            borderRadius: '12px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
+            border: '1px solid #E5E5E5',
             overflow: 'hidden'
           }}>
-            {/* Header with Gradient */}
+            {/* Header Section */}
             <div style={{
-              background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-              padding: '40px 30px',
-              textAlign: 'center',
-              position: 'relative',
-              overflow: 'hidden'
+              padding: '32px 32px 24px',
+              borderBottom: '1px solid #EBEBEB'
             }}>
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                style={{
-                  position: 'absolute',
-                  top: '-50px',
-                  right: '-50px',
-                  width: '200px',
-                  height: '200px',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  borderRadius: '50%',
-                }}
-              />
-
-              <Sparkles className="inline-block mb-3" size={40} color="white" />
               <h1 style={{
-                fontSize: '32px',
-                fontWeight: 'bold',
-                color: 'white',
-                marginBottom: '10px',
-                textShadow: '2px 2px 4px rgba(0,0,0,0.2)'
+                fontSize: '26px',
+                fontWeight: '600',
+                color: '#222222',
+                marginBottom: '8px',
+                letterSpacing: '-0.02em'
               }}>
-                🎓 VGU Student Council Elections 2025
+                Welcome to VGU Elections
               </h1>
               <p style={{
-                fontSize: '18px',
-                color: 'rgba(255, 255, 255, 0.95)',
-                fontWeight: '500'
+                fontSize: '16px',
+                color: '#717171',
+                lineHeight: '1.5',
+                margin: 0
               }}>
-                Your Voice, Your Choice! Let's Make a Difference
+                Please enter your details to begin voting
               </p>
             </div>
 
             {/* Form Content */}
-            <div style={{ padding: '40px 30px' }}>
+            <div style={{ padding: '32px' }}>
               <form onSubmit={handleSubmit}>
-                {/* Name Input with Modern Style */}
-                <div style={{ marginBottom: '25px' }}>
-                  <Label
+                {/* Name Input */}
+                <div style={{ marginBottom: '24px' }}>
+                  <label
                     htmlFor="name"
                     style={{
-                      fontSize: '16px',
+                      display: 'block',
+                      fontSize: '14px',
                       fontWeight: '600',
-                      color: '#4a5568',
-                      marginBottom: '8px',
-                      display: 'block'
+                      color: '#222222',
+                      marginBottom: '8px'
                     }}
                   >
-                    📝 Full Name <span style={{ color: '#f56565' }}>*</span>
-                  </Label>
-                  <Input
+                    Full Name
+                  </label>
+                  <input
                     type="text"
                     id="name"
                     value={name}
@@ -173,40 +127,41 @@ const VoterEntry = () => {
                     required
                     style={{
                       width: '100%',
-                      padding: '14px 18px',
+                      padding: '12px 16px',
                       fontSize: '16px',
-                      borderRadius: '12px',
-                      border: '2px solid #e2e8f0',
-                      transition: 'all 0.3s',
+                      borderRadius: '8px',
+                      border: '1px solid #B0B0B0',
                       outline: 'none',
-                      background: '#f7fafc'
+                      background: 'white',
+                      transition: 'all 0.2s',
+                      boxSizing: 'border-box'
                     }}
                     onFocus={(e) => {
-                      e.target.style.borderColor = '#667eea';
-                      e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
+                      e.target.style.borderColor = '#222222';
+                      e.target.style.boxShadow = '0 0 0 2px rgba(34,34,34,0.1)';
                     }}
                     onBlur={(e) => {
-                      e.target.style.borderColor = '#e2e8f0';
+                      e.target.style.borderColor = '#B0B0B0';
                       e.target.style.boxShadow = 'none';
                     }}
                   />
                 </div>
 
-                {/* ERP Input with Modern Style */}
-                <div style={{ marginBottom: '25px' }}>
-                  <Label
+                {/* ERP Input */}
+                <div style={{ marginBottom: '24px' }}>
+                  <label
                     htmlFor="erp"
                     style={{
-                      fontSize: '16px',
+                      display: 'block',
+                      fontSize: '14px',
                       fontWeight: '600',
-                      color: '#4a5568',
-                      marginBottom: '8px',
-                      display: 'block'
+                      color: '#222222',
+                      marginBottom: '8px'
                     }}
                   >
-                    🎫 ERP Number <span style={{ color: '#f56565' }}>*</span>
-                  </Label>
-                  <Input
+                    ERP Number
+                  </label>
+                  <input
                     type="text"
                     id="erp"
                     value={erpNumber}
@@ -215,42 +170,43 @@ const VoterEntry = () => {
                     required
                     style={{
                       width: '100%',
-                      padding: '14px 18px',
+                      padding: '12px 16px',
                       fontSize: '16px',
-                      borderRadius: '12px',
-                      border: erpNumber && !isValidErp ? '2px solid #f56565' : '2px solid #e2e8f0',
-                      transition: 'all 0.3s',
+                      borderRadius: '8px',
+                      border: erpNumber && !isValidErp ? '1px solid #C13515' : '1px solid #B0B0B0',
                       outline: 'none',
-                      background: '#f7fafc'
+                      background: 'white',
+                      transition: 'all 0.2s',
+                      boxSizing: 'border-box'
                     }}
                     onFocus={(e) => {
                       if (!erpNumber || isValidErp) {
-                        e.target.style.borderColor = '#667eea';
-                        e.target.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
+                        e.target.style.borderColor = '#222222';
+                        e.target.style.boxShadow = '0 0 0 2px rgba(34,34,34,0.1)';
                       }
                     }}
                     onBlur={(e) => {
                       if (!erpNumber || isValidErp) {
-                        e.target.style.borderColor = '#e2e8f0';
+                        e.target.style.borderColor = '#B0B0B0';
                         e.target.style.boxShadow = 'none';
                       }
                     }}
                   />
                   {erpNumber && !isValidErp && (
                     <motion.p
-                      initial={{ opacity: 0, y: -10 }}
+                      initial={{ opacity: 0, y: -5 }}
                       animate={{ opacity: 1, y: 0 }}
                       style={{
                         marginTop: '8px',
                         fontSize: '14px',
-                        color: '#f56565',
+                        color: '#C13515',
                         display: 'flex',
                         alignItems: 'center',
                         gap: '6px'
                       }}
                     >
-                      <AlertCircle size={16} />
-                      Invalid format. Must be VGU followed by 5-6 digits (e.g., VGU12345)
+                      <AlertCircle size={14} />
+                      Must be VGU followed by 5-6 digits (e.g., VGU12345)
                     </motion.p>
                   )}
                 </div>
@@ -258,52 +214,54 @@ const VoterEntry = () => {
                 {/* Error Alert */}
                 {error && (
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
                     style={{
-                      marginBottom: '20px',
-                      padding: '16px',
-                      borderRadius: '12px',
-                      background: 'linear-gradient(135deg, #fee2e2 0%, #fecaca 100%)',
-                      border: '2px solid #f87171',
+                      marginBottom: '24px',
+                      padding: '12px 16px',
+                      borderRadius: '8px',
+                      background: '#FFF4F1',
+                      border: '1px solid #F0D9D4',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '12px'
+                      gap: '10px'
                     }}
                   >
-                    <AlertCircle size={20} color="#dc2626" />
-                    <span style={{ color: '#dc2626', fontWeight: '500' }}>{error}</span>
+                    <AlertCircle size={18} color="#C13515" />
+                    <span style={{ color: '#C13515', fontSize: '14px', fontWeight: '500' }}>{error}</span>
                   </motion.div>
                 )}
 
-                {/* Submit Button with Gradient */}
-                <motion.button
+                {/* Submit Button */}
+                <button
                   type="submit"
                   disabled={!isFormValid || loading}
-                  whileHover={isFormValid && !loading ? { scale: 1.02 } : {}}
-                  whileTap={isFormValid && !loading ? { scale: 0.98 } : {}}
                   style={{
                     width: '100%',
-                    padding: '18px',
-                    fontSize: '18px',
-                    fontWeight: 'bold',
-                    borderRadius: '14px',
+                    padding: '14px',
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    borderRadius: '8px',
                     border: 'none',
-                    background: isFormValid && !loading
-                      ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                      : '#cbd5e0',
-                    color: 'white',
+                    background: isFormValid && !loading ? '#222222' : '#DDDDDD',
+                    color: isFormValid && !loading ? 'white' : '#999999',
                     cursor: isFormValid && !loading ? 'pointer' : 'not-allowed',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '10px',
-                    boxShadow: isFormValid && !loading
-                      ? '0 10px 25px rgba(102, 126, 234, 0.4)'
-                      : 'none',
-                    transition: 'all 0.3s',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px'
+                    gap: '8px',
+                    transition: 'all 0.2s',
+                    boxSizing: 'border-box'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (isFormValid && !loading) {
+                      e.target.style.background = '#000000';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (isFormValid && !loading) {
+                      e.target.style.background = '#222222';
+                    }
                   }}
                 >
                   {loading ? (
@@ -312,9 +270,9 @@ const VoterEntry = () => {
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                         style={{
-                          width: '20px',
-                          height: '20px',
-                          border: '3px solid rgba(255,255,255,0.3)',
+                          width: '16px',
+                          height: '16px',
+                          border: '2px solid rgba(255,255,255,0.3)',
                           borderTopColor: 'white',
                           borderRadius: '50%'
                         }}
@@ -323,31 +281,43 @@ const VoterEntry = () => {
                     </>
                   ) : (
                     <>
-                      🚀 Proceed to Vote
+                      Continue
                       <ArrowRight size={20} />
                     </>
                   )}
-                </motion.button>
+                </button>
               </form>
 
-              {/* Footer with Icon */}
+              {/* Footer Info */}
               <div style={{
-                marginTop: '30px',
-                padding: '20px',
-                background: 'linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%)',
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '10px',
-                border: '2px solid #93c5fd'
+                marginTop: '24px',
+                padding: '16px',
+                background: '#F7F7F7',
+                borderRadius: '8px',
+                textAlign: 'center'
               }}>
-                <CheckCircle2 size={20} color="#0284c7" />
-                <p style={{ margin: 0, color: '#0369a1', fontWeight: '500', fontSize: '14px' }}>
+                <p style={{
+                  margin: 0,
+                  color: '#717171',
+                  fontSize: '14px',
+                  lineHeight: '1.5'
+                }}>
                   One vote per student • Your vote is confidential
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Additional Info */}
+          <div style={{
+            marginTop: '24px',
+            textAlign: 'center',
+            color: '#717171',
+            fontSize: '14px'
+          }}>
+            <p style={{ margin: 0 }}>
+              By continuing, you agree to participate in the VGU Student Council Elections 2025
+            </p>
           </div>
         </motion.div>
       </div>

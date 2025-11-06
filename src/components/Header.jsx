@@ -1,24 +1,81 @@
 const Header = () => {
   return (
-    <header className="bg-card border-b shadow-sm py-3 sm:py-4 px-4 sm:px-6 mb-4 sm:mb-8">
-      <div className="container max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
+    <header style={{
+      background: 'white',
+      borderBottom: '1px solid #EBEBEB',
+      padding: '16px 20px',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+    }}>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '16px'
+      }}>
         {/* VGU Logo - Left */}
-        <div className="flex items-center flex-shrink-0">
-          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-vgu-blue rounded-full flex items-center justify-center text-white font-bold text-base sm:text-xl shadow-lg">
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          flexShrink: 0
+        }}>
+          <div style={{
+            width: '44px',
+            height: '44px',
+            background: '#004AAD',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            fontWeight: '700',
+            fontSize: '14px',
+            letterSpacing: '0.5px'
+          }}>
             VGU
           </div>
         </div>
 
         {/* Title - Center */}
-        <div className="text-center flex-1 min-w-0">
-          <h1 className="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold text-vgu-blue truncate">
+        <div style={{
+          textAlign: 'center',
+          flex: '1',
+          minWidth: 0
+        }}>
+          <h1 style={{
+            fontSize: '18px',
+            fontWeight: '600',
+            color: '#222222',
+            margin: 0,
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            letterSpacing: '-0.01em'
+          }}>
             Student Council Election 2025
           </h1>
         </div>
 
         {/* Student Council Logo - Right */}
-        <div className="flex items-center flex-shrink-0">
-          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-vgu-gold rounded-full flex items-center justify-center text-vgu-blue font-bold text-base sm:text-xl shadow-lg">
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          flexShrink: 0
+        }}>
+          <div style={{
+            width: '44px',
+            height: '44px',
+            background: '#FFD700',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#004AAD',
+            fontWeight: '700',
+            fontSize: '14px',
+            letterSpacing: '0.5px'
+          }}>
             SC
           </div>
         </div>

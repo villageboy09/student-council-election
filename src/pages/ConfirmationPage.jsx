@@ -6,9 +6,6 @@ import { useVote } from '../context/VoteContext';
 import { supabase } from '../lib/supabaseClient';
 import { positionLabels } from '../data/candidates';
 import Header from '../components/Header';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Alert, AlertDescription } from '../components/ui/alert';
 
 const ConfirmationPage = () => {
   const navigate = useNavigate();
@@ -75,109 +72,273 @@ const ConfirmationPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div style={{
+      minHeight: '100vh',
+      background: '#F7F7F7',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+    }}>
       <Header />
-      <div className="container max-w-4xl mx-auto px-4 py-6 sm:py-12">
+
+      <div style={{
+        maxWidth: '680px',
+        margin: '0 auto',
+        padding: '40px 20px 80px'
+      }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
         >
-          <Card className="shadow-lg">
-            <CardHeader className="text-center pb-6">
-              <CardTitle className="text-2xl sm:text-3xl font-bold text-vgu-blue">
-                Review Your Selections
-              </CardTitle>
-              <CardDescription className="text-base">
-                Please verify your choices before submitting
-              </CardDescription>
-            </CardHeader>
+          {/* Main Card */}
+          <div style={{
+            background: 'white',
+            borderRadius: '12px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
+            border: '1px solid #E5E5E5',
+            overflow: 'hidden'
+          }}>
+            {/* Header Section */}
+            <div style={{
+              padding: '32px 32px 24px',
+              borderBottom: '1px solid #EBEBEB'
+            }}>
+              <h1 style={{
+                fontSize: '26px',
+                fontWeight: '600',
+                color: '#222222',
+                marginBottom: '8px',
+                letterSpacing: '-0.02em'
+              }}>
+                Review your vote
+              </h1>
+              <p style={{
+                fontSize: '16px',
+                color: '#717171',
+                lineHeight: '1.5',
+                margin: 0
+              }}>
+                Please verify your selections before submitting
+              </p>
+            </div>
 
-            <CardContent className="space-y-6">
+            {/* Content */}
+            <div style={{ padding: '32px' }}>
               {/* Voter Info */}
-              <Card className="bg-blue-50/50 border-vgu-blue/20">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg text-vgu-blue flex items-center gap-2">
-                    <User className="h-5 w-5" />
-                    Voter Information
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm sm:text-base">
-                    <User className="h-4 w-4 text-muted-foreground" />
-                    <span className="font-medium">Name:</span>
-                    <span>{voteData.name}</span>
+              <div style={{
+                marginBottom: '32px',
+                padding: '20px',
+                background: '#F7F7F7',
+                borderRadius: '8px',
+                border: '1px solid #EBEBEB'
+              }}>
+                <h3 style={{
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  color: '#222222',
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  Voter Information
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <User size={18} color="#717171" />
+                    <span style={{ fontSize: '15px', color: '#717171' }}>Name:</span>
+                    <span style={{ fontSize: '15px', color: '#222222', fontWeight: '500' }}>{voteData.name}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm sm:text-base">
-                    <IdCard className="h-4 w-4 text-muted-foreground" />
-                    <span className="font-medium">ERP Number:</span>
-                    <span>{voteData.erp_number}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <IdCard size={18} color="#717171" />
+                    <span style={{ fontSize: '15px', color: '#717171' }}>ERP:</span>
+                    <span style={{ fontSize: '15px', color: '#222222', fontWeight: '500' }}>{voteData.erp_number}</span>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
               {/* Selected Candidates */}
-              <div className="space-y-3">
-                <h3 className="font-semibold text-vgu-blue text-lg flex items-center gap-2">
-                  Your Selected Candidates
+              <div style={{ marginBottom: '32px' }}>
+                <h3 style={{
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  color: '#222222',
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  Your Selections
                 </h3>
-                <div className="space-y-2">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {Object.entries(positionLabels).map(([key, label]) => (
-                    <Card key={key} className="bg-muted/30">
-                      <CardContent className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-3 sm:p-4 gap-1 sm:gap-2">
-                        <span className="font-medium text-sm sm:text-base">{label}:</span>
-                        <span className="text-sm sm:text-base font-semibold text-vgu-blue">
-                          {voteData[key]}
-                        </span>
-                      </CardContent>
-                    </Card>
+                    <div
+                      key={key}
+                      style={{
+                        padding: '16px',
+                        borderRadius: '8px',
+                        border: '1px solid #EBEBEB',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        gap: '16px',
+                        flexWrap: 'wrap'
+                      }}
+                    >
+                      <span style={{
+                        fontSize: '15px',
+                        color: '#717171',
+                        flex: '0 0 auto'
+                      }}>
+                        {label}
+                      </span>
+                      <span style={{
+                        fontSize: '15px',
+                        color: '#222222',
+                        fontWeight: '600',
+                        textAlign: 'right'
+                      }}>
+                        {voteData[key]}
+                      </span>
+                    </div>
                   ))}
                 </div>
+              </div>
+
+              {/* Warning */}
+              <div style={{
+                marginBottom: '32px',
+                padding: '16px',
+                background: '#FFF9E6',
+                border: '1px solid #F5E6C3',
+                borderRadius: '8px',
+                display: 'flex',
+                gap: '12px',
+                alignItems: 'flex-start'
+              }}>
+                <AlertTriangle size={20} color="#B8860B" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <p style={{
+                  margin: 0,
+                  fontSize: '14px',
+                  color: '#6B5B00',
+                  lineHeight: '1.5'
+                }}>
+                  Once submitted, your vote cannot be changed. Please review carefully before confirming.
+                </p>
               </div>
 
               {/* Error Message */}
               {error && (
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{
+                    marginBottom: '24px',
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    background: '#FFF4F1',
+                    border: '1px solid #F0D9D4',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px'
+                  }}
                 >
-                  <Alert variant="destructive">
-                    <AlertCircle className="h-4 w-4" />
-                    <AlertDescription>{error}</AlertDescription>
-                  </Alert>
+                  <AlertCircle size={18} color="#C13515" />
+                  <span style={{ color: '#C13515', fontSize: '14px', fontWeight: '500' }}>{error}</span>
                 </motion.div>
               )}
 
-              {/* Warning */}
-              <Alert className="border-yellow-500/50 bg-yellow-50 dark:bg-yellow-950">
-                <AlertTriangle className="h-4 w-4 text-yellow-600" />
-                <AlertDescription className="text-yellow-800 dark:text-yellow-200 text-sm">
-                  Once submitted, your vote cannot be changed. Please review carefully before confirming.
-                </AlertDescription>
-              </Alert>
-
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
-                <Button
+              <div style={{
+                display: 'flex',
+                gap: '12px',
+                flexWrap: 'wrap'
+              }}>
+                <button
                   onClick={handleBack}
                   disabled={loading}
-                  variant="outline"
-                  size="lg"
-                  className="w-full sm:flex-1 border-vgu-blue text-vgu-blue hover:bg-vgu-blue hover:text-white"
+                  style={{
+                    flex: '1',
+                    minWidth: '140px',
+                    padding: '14px',
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    borderRadius: '8px',
+                    border: '1px solid #222222',
+                    background: 'white',
+                    color: '#222222',
+                    cursor: loading ? 'not-allowed' : 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    transition: 'all 0.2s',
+                    opacity: loading ? 0.5 : 1
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!loading) {
+                      e.target.style.background = '#F7F7F7';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!loading) {
+                      e.target.style.background = 'white';
+                    }
+                  }}
                 >
-                  <ChevronLeft className="h-4 w-4 mr-2" />
+                  <ChevronLeft size={20} />
                   Back
-                </Button>
-                <Button
+                </button>
+                <button
                   onClick={handleSubmit}
                   disabled={loading}
-                  size="lg"
-                  className="w-full sm:flex-1 bg-vgu-blue hover:bg-vgu-blue/90"
+                  style={{
+                    flex: '2',
+                    minWidth: '180px',
+                    padding: '14px',
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    borderRadius: '8px',
+                    border: 'none',
+                    background: loading ? '#DDDDDD' : '#222222',
+                    color: loading ? '#999999' : 'white',
+                    cursor: loading ? 'not-allowed' : 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!loading) {
+                      e.target.style.background = '#000000';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!loading) {
+                      e.target.style.background = '#222222';
+                    }
+                  }}
                 >
-                  {loading ? 'Submitting...' : 'Confirm & Submit Vote'}
-                </Button>
+                  {loading ? (
+                    <>
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                        style={{
+                          width: '16px',
+                          height: '16px',
+                          border: '2px solid rgba(255,255,255,0.3)',
+                          borderTopColor: 'white',
+                          borderRadius: '50%'
+                        }}
+                      />
+                      Submitting...
+                    </>
+                  ) : (
+                    'Confirm & Submit Vote'
+                  )}
+                </button>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </motion.div>
       </div>
     </div>
