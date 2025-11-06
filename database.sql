@@ -26,13 +26,13 @@ ON votes
 FOR SELECT
 USING (true);
 
--- Create policy to prevent duplicate voting (only allow insert if ERP doesn't exist)
+-- ✅ Fixed policy: Prevent duplicate voting
 CREATE POLICY "Prevent duplicate voting"
 ON votes
 FOR INSERT
 WITH CHECK (
     NOT EXISTS (
-        SELECT 1 FROM votes WHERE erp_number = NEW.erp_number
+        SELECT 1 FROM votes v WHERE v.erp_number = votes.erp_number
     )
 );
 
