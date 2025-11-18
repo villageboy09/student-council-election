@@ -3,21 +3,27 @@ export const candidates = {
   president: [
     {
       id: 'p1',
-      name: 'Rajesh Kumar',
-      description: 'Leadership experience with vision for inclusive campus culture',
-      photo: 'https://ui-avatars.com/api/?name=Rajesh+Kumar&background=004AAD&color=fff&size=200',
+      name: 'Sudhir Pratap Singh',
+      description: 'Dedicated leader committed to student welfare and campus development',
+      photo: 'https://ui-avatars.com/api/?name=Sudhir+Pratap+Singh&background=004AAD&color=fff&size=200',
     },
     {
       id: 'p2',
-      name: 'Priya Sharma',
-      description: 'Proven track record in student welfare initiatives',
-      photo: 'https://ui-avatars.com/api/?name=Priya+Sharma&background=004AAD&color=fff&size=200',
+      name: 'Chetan Kumar Tiwari',
+      description: 'Experienced in student initiatives and community engagement',
+      photo: 'https://ui-avatars.com/api/?name=Chetan+Kumar+Tiwari&background=004AAD&color=fff&size=200',
     },
     {
       id: 'p3',
-      name: 'Amit Patel',
-      description: 'Innovative ideas for campus development and student engagement',
-      photo: 'https://ui-avatars.com/api/?name=Amit+Patel&background=004AAD&color=fff&size=200',
+      name: 'Hemant Modi',
+      description: 'Visionary leader with innovative ideas for campus improvement',
+      photo: 'https://ui-avatars.com/api/?name=Hemant+Modi&background=004AAD&color=fff&size=200',
+    },
+    {
+      id: 'p4',
+      name: 'Kartik Yadav',
+      description: 'Passionate about student rights and inclusive campus culture',
+      photo: 'https://ui-avatars.com/api/?name=Kartik+Yadav&background=004AAD&color=fff&size=200',
     },
   ],
   vice_president: [
@@ -63,21 +69,15 @@ export const candidates = {
   treasurer: [
     {
       id: 't1',
-      name: 'Pooja Joshi',
-      description: 'Financial management expertise and budget planning',
-      photo: 'https://ui-avatars.com/api/?name=Pooja+Joshi&background=004AAD&color=fff&size=200',
+      name: 'Somya Singhal',
+      description: 'Strong financial management expertise and budget planning skills',
+      photo: 'https://ui-avatars.com/api/?name=Somya+Singhal&background=004AAD&color=fff&size=200',
     },
     {
       id: 't2',
-      name: 'Rohan Das',
-      description: 'Experience in financial reporting and resource allocation',
-      photo: 'https://ui-avatars.com/api/?name=Rohan+Das&background=004AAD&color=fff&size=200',
-    },
-    {
-      id: 't3',
-      name: 'Simran Kaur',
-      description: 'Strong analytical skills and fiscal responsibility',
-      photo: 'https://ui-avatars.com/api/?name=Simran+Kaur&background=004AAD&color=fff&size=200',
+      name: 'Harsh Dudi',
+      description: 'Experienced in financial reporting and resource allocation',
+      photo: 'https://ui-avatars.com/api/?name=Harsh+Dudi&background=004AAD&color=fff&size=200',
     },
   ],
   management_head: [
