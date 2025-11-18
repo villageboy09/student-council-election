@@ -15,10 +15,7 @@ export const VoteProvider = ({ children }) => {
     name: '',
     erp_number: '',
     president: '',
-    vice_president: '',
-    secretary: '',
     treasurer: '',
-    management_head: '',
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -35,10 +32,7 @@ export const VoteProvider = ({ children }) => {
       name: '',
       erp_number: '',
       president: '',
-      vice_president: '',
-      secretary: '',
       treasurer: '',
-      management_head: '',
     });
     setIsSubmitted(false);
   };
