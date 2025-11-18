@@ -58,7 +58,7 @@ const SelectionPage = () => {
     <div style={{
       minHeight: '100vh',
       background: '#F7F7F7',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+      fontFamily: "'Poppins', sans-serif"
     }}>
       <Header />
 

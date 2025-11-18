@@ -14,7 +14,7 @@ const VoterEntry = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const erpPattern = /^VGU\d{5,6}$/i;
+  const erpPattern = /^VGU\d{4,}$/i;
   const isValidErp = erpPattern.test(erpNumber);
   const isFormValid = name.trim() && isValidErp;
 
@@ -55,7 +55,7 @@ const VoterEntry = () => {
     <div style={{
       minHeight: '100vh',
       background: '#F7F7F7',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+      fontFamily: "'Poppins', sans-serif"
     }}>
       <Header />
 
@@ -89,7 +89,7 @@ const VoterEntry = () => {
                 marginBottom: '8px',
                 letterSpacing: '-0.02em'
               }}>
-                Welcome to VGU Elections
+                VGU Student Council Elections
               </h1>
               <p style={{
                 fontSize: '16px',
@@ -206,7 +206,7 @@ const VoterEntry = () => {
                       }}
                     >
                       <AlertCircle size={14} />
-                      Must be VGU followed by 5-6 digits (e.g., VGU12345)
+                      Must be VGU followed by at least 4 digits (e.g., VGU1234)
                     </motion.p>
                   )}
                 </div>

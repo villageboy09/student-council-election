@@ -4,7 +4,7 @@ const Header = () => {
       background: 'white',
       borderBottom: '1px solid #EBEBEB',
       padding: '16px 20px',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+      fontFamily: "'Poppins', sans-serif"
     }}>
       <div style={{
         maxWidth: '1200px',
