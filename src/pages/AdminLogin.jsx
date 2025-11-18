@@ -14,7 +14,6 @@ const AdminLogin = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Redirect if already logged in
     if (isAuthenticated()) {
       navigate('/vote-panel');
     }
@@ -32,157 +31,63 @@ const AdminLogin = () => {
     if (result.success) {
       navigate('/vote-panel');
     } else {
-      setError(result.error);
+      setError(result.error || 'Invalid credentials. Please try again.');
     }
-
     setLoading(false);
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #8B2635 0%, #5C1A1B 100%)',
-      fontFamily: "'Poppins', sans-serif",
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '40px 20px',
-      position: 'relative',
-      overflow: 'hidden'
-    }}>
-      {/* Background decorative elements */}
-      <div style={{
-        position: 'absolute',
-        top: '-50%',
-        left: '-20%',
-        width: '600px',
-        height: '600px',
-        borderRadius: '50%',
-        background: 'rgba(255,255,255,0.05)',
-        pointerEvents: 'none'
-      }} />
-      <div style={{
-        position: 'absolute',
-        bottom: '-30%',
-        right: '-10%',
-        width: '400px',
-        height: '400px',
-        borderRadius: '50%',
-        background: 'rgba(255,255,255,0.05)',
-        pointerEvents: 'none'
-      }} />
+    <div className="min-h-screen bg-gradient-to-br from-red-900 via-red-800 to-maroon-900 flex items-center justify-center px-4 py-12 relative overflow-hidden font-poppins">
+      {/* Decorative Blobs */}
+      <div className="absolute -top-48 -left-32 w-96 h-96 lg:w-[600px] lg:h-[600px] bg-white/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-48 -right-20 w-80 h-80 lg:w-[500px] lg:h-[500px] bg-white/5 rounded-full blur-3xl pointer-events-none" />
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        style={{
-          width: '100%',
-          maxWidth: '420px',
-          position: 'relative',
-          zIndex: 1
-        }}
+        transition={{ duration: 0.6 }}
+        className="w-full max-w-md relative z-10"
       >
-        {/* VGU Logo */}
+        {/* Logo */}
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          style={{
-            textAlign: 'center',
-            marginBottom: '24px'
-          }}
+          className="flex justify-center mb-8"
         >
           <img
             src={vguLogo}
             alt="VGU Logo"
-            style={{
-              height: '80px',
-              width: 'auto',
-              objectFit: 'contain',
-              borderRadius: '12px',
-              background: 'white',
-              padding: '12px',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.2)'
-            }}
+            className="h-20 w-auto object-contain bg-white p-3 rounded-2xl shadow-2xl"
           />
         </motion.div>
 
-        {/* Main Card */}
-        <div style={{
-          background: 'white',
-          borderRadius: '24px',
-          boxShadow: '0 25px 80px rgba(0,0,0,0.3)',
-          overflow: 'hidden'
-        }}>
-          {/* Header Section */}
-          <div style={{
-            padding: '32px 32px 24px',
-            textAlign: 'center',
-            borderBottom: '1px solid #f0f0f0'
-          }}>
+        {/* Card */}
+        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
+          {/* Header */}
+          <div className="px-8 pt-10 pb-6 text-center border-b border-gray-100">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '56px',
-                height: '56px',
-                borderRadius: '16px',
-                background: 'linear-gradient(135deg, #8B2635 0%, #5C1A1B 100%)',
-                marginBottom: '16px',
-                boxShadow: '0 8px 24px rgba(139, 38, 53, 0.4)'
-              }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-red-700 to-red-900 shadow-xl mb-4"
             >
-              <Lock size={28} color="white" />
+              <Lock size={32} className="text-white" />
             </motion.div>
-            <h1 style={{
-              fontSize: '26px',
-              fontWeight: '700',
-              color: '#1a1a1a',
-              marginBottom: '8px',
-              letterSpacing: '-0.02em'
-            }}>
-              Admin Portal
-            </h1>
-            <p style={{
-              fontSize: '14px',
-              color: '#666666',
-              margin: 0
-            }}>
-              Sign in to access the voting control panel
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Portal</h1>
+            <p className="text-gray-500 text-sm">Sign in to access the voting control panel</p>
           </div>
 
-          {/* Form Content */}
-          <div style={{ padding: '32px' }}>
-            <form onSubmit={handleSubmit}>
-              {/* Email Input */}
-              <div style={{ marginBottom: '20px' }}>
-                <label
-                  htmlFor="email"
-                  style={{
-                    display: 'block',
-                    fontSize: '13px',
-                    fontWeight: '600',
-                    color: '#333333',
-                    marginBottom: '8px',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.5px'
-                  }}
-                >
+          {/* Form */}
+          <div className="p-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Email Field */}
+              <div>
+                <label htmlFor="email" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
                   Email Address
                 </label>
-                <div style={{ position: 'relative' }}>
-                  <Mail size={18} color="#999" style={{
-                    position: 'absolute',
-                    left: '14px',
-                    top: '50%',
-                    transform: 'translateY(-50%)'
-                  }} />
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
                   <input
                     type="email"
                     id="email"
@@ -190,154 +95,60 @@ const AdminLogin = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="admin@vgu.ac.in"
                     required
-                    style={{
-                      width: '100%',
-                      padding: '14px 16px 14px 44px',
-                      fontSize: '15px',
-                      borderRadius: '12px',
-                      border: '2px solid #e8e8e8',
-                      outline: 'none',
-                      background: '#fafafa',
-                      transition: 'all 0.3s',
-                      boxSizing: 'border-box'
-                    }}
-                    onFocus={(e) => {
-                      e.target.style.borderColor = '#8B2635';
-                      e.target.style.background = 'white';
-                      e.target.style.boxShadow = '0 0 0 4px rgba(139, 38, 53, 0.1)';
-                    }}
-                    onBlur={(e) => {
-                      e.target.style.borderColor = '#e8e8e8';
-                      e.target.style.background = '#fafafa';
-                      e.target.style.boxShadow = 'none';
-                    }}
+                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:bg-white focus:border-red-700 focus:outline-none focus:ring-4 focus:ring-red-700/10 transition-all duration-300"
                   />
                 </div>
               </div>
 
-              {/* Password Input */}
-              <div style={{ marginBottom: '24px' }}>
-                <label
-                  htmlFor="password"
-                  style={{
-                    display: 'block',
-                    fontSize: '13px',
-                    fontWeight: '600',
-                    color: '#333333',
-                    marginBottom: '8px',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.5px'
-                  }}
-                >
+              {/* Password Field */}
+              <div>
+                <label htmlFor="password" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
                   Password
                 </label>
-                <div style={{ position: 'relative' }}>
-                  <Lock size={18} color="#999" style={{
-                    position: 'absolute',
-                    left: '14px',
-                    top: '50%',
-                    transform: 'translateY(-50%)'
-                  }} />
+                <div className="relative">
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
                   <input
                     type="password"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
+                    placeholder="••••••••••••"
                     required
-                    style={{
-                      width: '100%',
-                      padding: '14px 16px 14px 44px',
-                      fontSize: '15px',
-                      borderRadius: '12px',
-                      border: '2px solid #e8e8e8',
-                      outline: 'none',
-                      background: '#fafafa',
-                      transition: 'all 0.3s',
-                      boxSizing: 'border-box'
-                    }}
-                    onFocus={(e) => {
-                      e.target.style.borderColor = '#8B2635';
-                      e.target.style.background = 'white';
-                      e.target.style.boxShadow = '0 0 0 4px rgba(139, 38, 53, 0.1)';
-                    }}
-                    onBlur={(e) => {
-                      e.target.style.borderColor = '#e8e8e8';
-                      e.target.style.background = '#fafafa';
-                      e.target.style.boxShadow = 'none';
-                    }}
+                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:bg-white focus:border-red-700 focus:outline-none focus:ring-4 focus:ring-red-700/10 transition-all duration-300"
                   />
                 </div>
               </div>
 
-              {/* Error Alert */}
+              {/* Error Message */}
               {error && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  style={{
-                    marginBottom: '24px',
-                    padding: '14px 16px',
-                    borderRadius: '12px',
-                    background: '#FEF2F2',
-                    border: '1px solid #FECACA',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '10px'
-                  }}
+                  className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-xl"
                 >
-                  <AlertCircle size={18} color="#DC2626" />
-                  <span style={{ color: '#DC2626', fontSize: '14px', fontWeight: '500' }}>{error}</span>
+                  <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+                  <span className="text-sm font-medium text-red-700">{error}</span>
                 </motion.div>
               )}
 
               {/* Submit Button */}
-              <button
+              <motion.button
+                whileHover={isFormValid && !loading ? { y: -2 } : {}}
+                whileTap={isFormValid && !loading ? { scale: 0.98 } : {}}
                 type="submit"
                 disabled={!isFormValid || loading}
-                style={{
-                  width: '100%',
-                  padding: '16px',
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  borderRadius: '12px',
-                  border: 'none',
-                  background: isFormValid && !loading ? 'linear-gradient(135deg, #8B2635 0%, #5C1A1B 100%)' : '#e8e8e8',
-                  color: isFormValid && !loading ? 'white' : '#999999',
-                  cursor: isFormValid && !loading ? 'pointer' : 'not-allowed',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '10px',
-                  transition: 'all 0.3s',
-                  boxSizing: 'border-box',
-                  boxShadow: isFormValid && !loading ? '0 8px 24px rgba(139, 38, 53, 0.4)' : 'none'
-                }}
-                onMouseEnter={(e) => {
-                  if (isFormValid && !loading) {
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 12px 28px rgba(139, 38, 53, 0.5)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (isFormValid && !loading) {
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = '0 8px 24px rgba(139, 38, 53, 0.4)';
-                  }
-                }}
+                className={`w-full py-4 px-6 rounded-xl font-semibold text-white flex items-center justify-center gap-3 transition-all duration-300 shadow-lg ${
+                  isFormValid && !loading
+                    ? 'bg-gradient-to-r from-red-700 to-red-900 hover:shadow-2xl cursor-pointer'
+                    : 'bg-gray-300 cursor-not-allowed'
+                }`}
               >
                 {loading ? (
                   <>
                     <motion.div
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                      style={{
-                        width: '18px',
-                        height: '18px',
-                        border: '2px solid rgba(255,255,255,0.3)',
-                        borderTopColor: 'white',
-                        borderRadius: '50%'
-                      }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
                     />
                     Signing in...
                   </>
@@ -347,24 +158,15 @@ const AdminLogin = () => {
                     Sign In to Dashboard
                   </>
                 )}
-              </button>
+              </motion.button>
             </form>
           </div>
         </div>
 
         {/* Footer */}
-        <div style={{
-          marginTop: '24px',
-          textAlign: 'center',
-          color: 'rgba(255,255,255,0.7)',
-          fontSize: '13px'
-        }}>
-          <p style={{ margin: 0, fontWeight: '500' }}>
-            VGU Student Council Election 2025
-          </p>
-          <p style={{ margin: '4px 0 0', fontSize: '12px', opacity: 0.8 }}>
-            Secure Admin Access
-          </p>
+        <div className="text-center mt-8 text-white/70">
+          <p className="font-medium">VGU Student Council Election 2025</p>
+          <p className="text-sm opacity-80 mt-1">Secure Admin Access • Powered by VGU IT</p>
         </div>
       </motion.div>
     </div>
