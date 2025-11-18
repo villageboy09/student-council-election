@@ -54,8 +54,8 @@ const SelectionPage = () => {
   return (
     <div style={{
       minHeight: '100vh',
-      background: '#F7F7F7',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+      background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+      fontFamily: "'Poppins', sans-serif"
     }}>
       <Header />
 
@@ -92,7 +92,7 @@ const SelectionPage = () => {
                 transition={{ duration: 0.5, ease: 'easeOut' }}
                 style={{
                   height: '100%',
-                  background: '#222222',
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                   borderRadius: '3px'
                 }}
               />
@@ -167,16 +167,17 @@ const SelectionPage = () => {
               >
                 <div style={{
                   background: 'white',
-                  borderRadius: '12px',
+                  borderRadius: '16px',
                   overflow: 'hidden',
                   border: selectedCandidate === candidate.name
-                    ? '2px solid #222222'
+                    ? '3px solid #667eea'
                     : '1px solid #E5E5E5',
                   boxShadow: selectedCandidate === candidate.name
-                    ? '0 4px 12px rgba(0,0,0,0.15)'
-                    : '0 1px 3px rgba(0,0,0,0.12)',
-                  transition: 'all 0.2s',
-                  position: 'relative'
+                    ? '0 8px 25px rgba(102, 126, 234, 0.3)'
+                    : '0 2px 8px rgba(0,0,0,0.08)',
+                  transition: 'all 0.3s',
+                  position: 'relative',
+                  transform: selectedCandidate === candidate.name ? 'scale(1.02)' : 'scale(1)'
                 }}>
                   {/* Image */}
                   <div style={{
@@ -206,12 +207,12 @@ const SelectionPage = () => {
                           right: '12px',
                           width: '32px',
                           height: '32px',
-                          background: '#222222',
+                          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                           borderRadius: '50%',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                          boxShadow: '0 4px 12px rgba(102, 126, 234, 0.4)'
                         }}
                       >
                         <Check size={20} color="white" strokeWidth={3} />
@@ -261,18 +262,18 @@ const SelectionPage = () => {
                 fontSize: '16px',
                 fontWeight: '600',
                 borderRadius: '8px',
-                border: '1px solid #222222',
+                border: '2px solid #667eea',
                 background: 'white',
-                color: '#222222',
+                color: '#667eea',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
-                transition: 'all 0.2s'
+                transition: 'all 0.3s'
               }}
               onMouseEnter={(e) => {
-                e.target.style.background = '#F7F7F7';
+                e.target.style.background = '#f0f3ff';
               }}
               onMouseLeave={(e) => {
                 e.target.style.background = 'white';
@@ -293,23 +294,26 @@ const SelectionPage = () => {
                 fontWeight: '600',
                 borderRadius: '8px',
                 border: 'none',
-                background: selectedCandidate ? '#222222' : '#DDDDDD',
+                background: selectedCandidate ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#DDDDDD',
                 color: selectedCandidate ? 'white' : '#999999',
                 cursor: selectedCandidate ? 'pointer' : 'not-allowed',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
-                transition: 'all 0.2s'
+                transition: 'all 0.3s',
+                boxShadow: selectedCandidate ? '0 4px 15px rgba(102, 126, 234, 0.4)' : 'none'
               }}
               onMouseEnter={(e) => {
                 if (selectedCandidate) {
-                  e.target.style.background = '#000000';
+                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.5)';
                 }
               }}
               onMouseLeave={(e) => {
                 if (selectedCandidate) {
-                  e.target.style.background = '#222222';
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.4)';
                 }
               }}
             >

@@ -31,8 +31,8 @@ const ThankYouPage = () => {
   return (
     <div style={{
       minHeight: '100vh',
-      background: '#F7F7F7',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+      background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+      fontFamily: "'Poppins', sans-serif",
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -72,8 +72,9 @@ const ThankYouPage = () => {
                 width: '80px',
                 height: '80px',
                 borderRadius: '50%',
-                background: '#00A699',
-                marginBottom: '24px'
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                marginBottom: '24px',
+                boxShadow: '0 8px 25px rgba(102, 126, 234, 0.4)'
               }}
             >
               <CheckCircle2 size={48} color="white" strokeWidth={2.5} />

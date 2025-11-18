@@ -68,8 +68,8 @@ const ConfirmationPage = () => {
   return (
     <div style={{
       minHeight: '100vh',
-      background: '#F7F7F7',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+      background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+      fontFamily: "'Poppins', sans-serif"
     }}>
       <Header />
 
@@ -255,20 +255,20 @@ const ConfirmationPage = () => {
                     fontSize: '16px',
                     fontWeight: '600',
                     borderRadius: '8px',
-                    border: '1px solid #222222',
+                    border: '2px solid #667eea',
                     background: 'white',
-                    color: '#222222',
+                    color: '#667eea',
                     cursor: loading ? 'not-allowed' : 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '8px',
-                    transition: 'all 0.2s',
+                    transition: 'all 0.3s',
                     opacity: loading ? 0.5 : 1
                   }}
                   onMouseEnter={(e) => {
                     if (!loading) {
-                      e.target.style.background = '#F7F7F7';
+                      e.target.style.background = '#f0f3ff';
                     }
                   }}
                   onMouseLeave={(e) => {
@@ -291,23 +291,26 @@ const ConfirmationPage = () => {
                     fontWeight: '600',
                     borderRadius: '8px',
                     border: 'none',
-                    background: loading ? '#DDDDDD' : '#222222',
+                    background: loading ? '#DDDDDD' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                     color: loading ? '#999999' : 'white',
                     cursor: loading ? 'not-allowed' : 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '8px',
-                    transition: 'all 0.2s'
+                    transition: 'all 0.3s',
+                    boxShadow: loading ? 'none' : '0 4px 15px rgba(102, 126, 234, 0.4)'
                   }}
                   onMouseEnter={(e) => {
                     if (!loading) {
-                      e.target.style.background = '#000000';
+                      e.target.style.transform = 'translateY(-2px)';
+                      e.target.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.5)';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!loading) {
-                      e.target.style.background = '#222222';
+                      e.target.style.transform = 'translateY(0)';
+                      e.target.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.4)';
                     }
                   }}
                 >

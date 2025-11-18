@@ -43,7 +43,7 @@ export const candidates = {
     },
     {
       id: 't2',
-      name: 'Harsh Dudi',
+      name: 'Harsh Kumar',
       description: 'Candidate for Treasurer',
       photo: harshImg,
     },

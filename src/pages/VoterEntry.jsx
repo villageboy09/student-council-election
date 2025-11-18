@@ -54,8 +54,8 @@ const VoterEntry = () => {
   return (
     <div style={{
       minHeight: '100vh',
-      background: '#F7F7F7',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+      background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+      fontFamily: "'Poppins', sans-serif"
     }}>
       <Header />
 
@@ -243,24 +243,27 @@ const VoterEntry = () => {
                     fontWeight: '600',
                     borderRadius: '8px',
                     border: 'none',
-                    background: isFormValid && !loading ? '#222222' : '#DDDDDD',
+                    background: isFormValid && !loading ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#DDDDDD',
                     color: isFormValid && !loading ? 'white' : '#999999',
                     cursor: isFormValid && !loading ? 'pointer' : 'not-allowed',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '8px',
-                    transition: 'all 0.2s',
-                    boxSizing: 'border-box'
+                    transition: 'all 0.3s',
+                    boxSizing: 'border-box',
+                    boxShadow: isFormValid && !loading ? '0 4px 15px rgba(102, 126, 234, 0.4)' : 'none'
                   }}
                   onMouseEnter={(e) => {
                     if (isFormValid && !loading) {
-                      e.target.style.background = '#000000';
+                      e.target.style.transform = 'translateY(-2px)';
+                      e.target.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.5)';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (isFormValid && !loading) {
-                      e.target.style.background = '#222222';
+                      e.target.style.transform = 'translateY(0)';
+                      e.target.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.4)';
                     }
                   }}
                 >
