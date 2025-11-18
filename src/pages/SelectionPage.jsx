@@ -16,10 +16,7 @@ const SelectionPage = () => {
 
   const positionFlow = [
     'president',
-    'vice_president',
-    'secretary',
     'treasurer',
-    'management_head',
   ];
 
   const currentIndex = positionFlow.indexOf(position);

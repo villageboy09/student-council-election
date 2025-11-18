@@ -19,10 +19,7 @@ const ConfirmationPage = () => {
       !voteData.name ||
       !voteData.erp_number ||
       !voteData.president ||
-      !voteData.vice_president ||
-      !voteData.secretary ||
-      !voteData.treasurer ||
-      !voteData.management_head
+      !voteData.treasurer
     ) {
       navigate('/');
     }
@@ -39,10 +36,7 @@ const ConfirmationPage = () => {
           name: voteData.name,
           erp_number: voteData.erp_number,
           president: voteData.president,
-          vice_president: voteData.vice_president,
-          secretary: voteData.secretary,
           treasurer: voteData.treasurer,
-          management_head: voteData.management_head,
         },
       ]);
 
@@ -68,7 +62,7 @@ const ConfirmationPage = () => {
   };
 
   const handleBack = () => {
-    navigate('/vote/management_head');
+    navigate('/vote/treasurer');
   };
 
   return (
