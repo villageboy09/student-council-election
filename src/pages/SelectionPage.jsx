@@ -179,14 +179,20 @@ const SelectionPage = () => {
                   position: 'relative'
                 }}>
                   {/* Image */}
-                  <div style={{ position: 'relative' }}>
+                  <div style={{
+                    position: 'relative',
+                    background: '#F0F0F0',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
                     <img
                       src={candidate.photo}
                       alt={candidate.name}
                       style={{
                         width: '100%',
                         height: '240px',
-                        objectFit: 'cover'
+                        objectFit: 'contain'
                       }}
                     />
                     {selectedCandidate === candidate.name && (
