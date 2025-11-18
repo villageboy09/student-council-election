@@ -34,6 +34,7 @@ const ConfirmationPage = () => {
       const { error: insertError } = await supabase.from('votes').insert([
         {
           name: voteData.name,
+          department: voteData.department,
           erp_number: voteData.erp_number,
           president: voteData.president,
           treasurer: voteData.treasurer,

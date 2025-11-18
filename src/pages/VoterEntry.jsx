@@ -10,13 +10,14 @@ const VoterEntry = () => {
   const navigate = useNavigate();
   const { updateVoteData } = useVote();
   const [name, setName] = useState('');
+  const [department, setDepartment] = useState('');
   const [erpNumber, setErpNumber] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const erpPattern = /^VGU\d{5,6}$/i;
   const isValidErp = erpPattern.test(erpNumber);
-  const isFormValid = name.trim() && isValidErp;
+  const isFormValid = name.trim() && department.trim() && isValidErp;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +42,7 @@ const VoterEntry = () => {
       }
 
       updateVoteData('name', name.trim());
+      updateVoteData('department', department.trim());
       updateVoteData('erp_number', erpNumber.toUpperCase());
       navigate('/vote/president');
     } catch (err) {
@@ -124,6 +126,49 @@ const VoterEntry = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter your full name"
+                    required
+                    style={{
+                      width: '100%',
+                      padding: '12px 16px',
+                      fontSize: '16px',
+                      borderRadius: '8px',
+                      border: '1px solid #B0B0B0',
+                      outline: 'none',
+                      background: 'white',
+                      transition: 'all 0.2s',
+                      boxSizing: 'border-box'
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = '#222222';
+                      e.target.style.boxShadow = '0 0 0 2px rgba(34,34,34,0.1)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = '#B0B0B0';
+                      e.target.style.boxShadow = 'none';
+                    }}
+                  />
+                </div>
+
+                {/* Department Input */}
+                <div style={{ marginBottom: '24px' }}>
+                  <label
+                    htmlFor="department"
+                    style={{
+                      display: 'block',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      color: '#222222',
+                      marginBottom: '8px'
+                    }}
+                  >
+                    Department
+                  </label>
+                  <input
+                    type="text"
+                    id="department"
+                    value={department}
+                    onChange={(e) => setDepartment(e.target.value)}
+                    placeholder="e.g., Computer Science"
                     required
                     style={{
                       width: '100%',
