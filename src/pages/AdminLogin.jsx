@@ -41,7 +41,7 @@ const AdminLogin = () => {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'linear-gradient(135deg, #8B2635 0%, #5C1A1B 100%)',
       fontFamily: "'Poppins', sans-serif",
       display: 'flex',
       alignItems: 'center',
@@ -132,9 +132,9 @@ const AdminLogin = () => {
                 width: '56px',
                 height: '56px',
                 borderRadius: '16px',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                background: 'linear-gradient(135deg, #8B2635 0%, #5C1A1B 100%)',
                 marginBottom: '16px',
-                boxShadow: '0 8px 24px rgba(102, 126, 234, 0.4)'
+                boxShadow: '0 8px 24px rgba(139, 38, 53, 0.4)'
               }}
             >
               <Lock size={28} color="white" />
@@ -202,9 +202,9 @@ const AdminLogin = () => {
                       boxSizing: 'border-box'
                     }}
                     onFocus={(e) => {
-                      e.target.style.borderColor = '#667eea';
+                      e.target.style.borderColor = '#8B2635';
                       e.target.style.background = 'white';
-                      e.target.style.boxShadow = '0 0 0 4px rgba(102, 126, 234, 0.1)';
+                      e.target.style.boxShadow = '0 0 0 4px rgba(139, 38, 53, 0.1)';
                     }}
                     onBlur={(e) => {
                       e.target.style.borderColor = '#e8e8e8';
@@ -257,9 +257,9 @@ const AdminLogin = () => {
                       boxSizing: 'border-box'
                     }}
                     onFocus={(e) => {
-                      e.target.style.borderColor = '#667eea';
+                      e.target.style.borderColor = '#8B2635';
                       e.target.style.background = 'white';
-                      e.target.style.boxShadow = '0 0 0 4px rgba(102, 126, 234, 0.1)';
+                      e.target.style.boxShadow = '0 0 0 4px rgba(139, 38, 53, 0.1)';
                     }}
                     onBlur={(e) => {
                       e.target.style.borderColor = '#e8e8e8';
@@ -302,7 +302,7 @@ const AdminLogin = () => {
                   fontWeight: '600',
                   borderRadius: '12px',
                   border: 'none',
-                  background: isFormValid && !loading ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#e8e8e8',
+                  background: isFormValid && !loading ? 'linear-gradient(135deg, #8B2635 0%, #5C1A1B 100%)' : '#e8e8e8',
                   color: isFormValid && !loading ? 'white' : '#999999',
                   cursor: isFormValid && !loading ? 'pointer' : 'not-allowed',
                   display: 'flex',
@@ -311,18 +311,18 @@ const AdminLogin = () => {
                   gap: '10px',
                   transition: 'all 0.3s',
                   boxSizing: 'border-box',
-                  boxShadow: isFormValid && !loading ? '0 8px 24px rgba(102, 126, 234, 0.4)' : 'none'
+                  boxShadow: isFormValid && !loading ? '0 8px 24px rgba(139, 38, 53, 0.4)' : 'none'
                 }}
                 onMouseEnter={(e) => {
                   if (isFormValid && !loading) {
                     e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 12px 28px rgba(102, 126, 234, 0.5)';
+                    e.target.style.boxShadow = '0 12px 28px rgba(139, 38, 53, 0.5)';
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (isFormValid && !loading) {
                     e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = '0 8px 24px rgba(102, 126, 234, 0.4)';
+                    e.target.style.boxShadow = '0 8px 24px rgba(139, 38, 53, 0.4)';
                   }
                 }}
               >
