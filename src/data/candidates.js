@@ -4,22 +4,22 @@ export const candidates = {
     {
       id: 'p1',
       name: 'Sudhir Pratap Singh',
-      photo: 'https://ui-avatars.com/api/?name=Sudhir+Pratap+Singh&background=004AAD&color=fff&size=200',
+      photo: 'https://drive.google.com/uc?export=view&id=1c31HUsQbxA4GZQuFhi32qweAwBLXwukM',
     },
     {
       id: 'p2',
       name: 'Chetan Kumar Tiwari',
-      photo: 'https://ui-avatars.com/api/?name=Chetan+Kumar+Tiwari&background=004AAD&color=fff&size=200',
+      photo: 'https://drive.google.com/uc?export=view&id=1CxHUeBFyssuLO2yrLSpOiek5k3kIN0Ko',
     },
     {
       id: 'p3',
       name: 'Hemant Modi',
-      photo: 'https://ui-avatars.com/api/?name=Hemant+Modi&background=004AAD&color=fff&size=200',
+      photo: 'https://drive.google.com/uc?export=view&id=1ve5eGXCI_ep_drxgyhxSuXAXjcLPqAjd',
     },
     {
       id: 'p4',
       name: 'Kartik Yadav',
-      photo: 'https://ui-avatars.com/api/?name=Kartik+Yadav&background=004AAD&color=fff&size=200',
+      photo: 'https://drive.google.com/uc?export=view&id=1jRnpGD8SHt6A6fo9GMNtaTmcIsQgPmJg',
     },
   ],
   vice_president: [
@@ -60,12 +60,12 @@ export const candidates = {
     {
       id: 't1',
       name: 'Somya Singhal',
-      photo: 'https://ui-avatars.com/api/?name=Somya+Singhal&background=004AAD&color=fff&size=200',
+      photo: 'https://drive.google.com/uc?export=view&id=1dd7edjDYINILyHMhzv_9kbJECPsBfRER',
     },
     {
       id: 't2',
       name: 'Harsh Dudi',
-      photo: 'https://ui-avatars.com/api/?name=Harsh+Dudi&background=004AAD&color=fff&size=200',
+      photo: 'https://drive.google.com/uc?export=view&id=1tCoc_JbyjmP0hp11GZGJJLx5Eim4ZyU3',
     },
   ],
   management_head: [
