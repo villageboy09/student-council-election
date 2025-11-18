@@ -5,8 +5,6 @@ import { AlertCircle, ArrowRight } from 'lucide-react';
 import { useVote } from '../context/VoteContext';
 import { supabase } from '../lib/supabaseClient';
 import Header from '../components/Header';
-import vguLogo from '../assets/vgu.png';
-import councilLogo from '../assets/council.jpg';
 
 const VoterEntry = () => {
   const navigate = useNavigate();
@@ -84,40 +82,12 @@ const VoterEntry = () => {
               padding: '32px 32px 24px',
               borderBottom: '1px solid #EBEBEB'
             }}>
-              {/* Logos */}
-              <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '24px',
-                marginBottom: '24px'
-              }}>
-                <img
-                  src={vguLogo}
-                  alt="VGU Logo"
-                  style={{
-                    height: '60px',
-                    width: 'auto',
-                    objectFit: 'contain'
-                  }}
-                />
-                <img
-                  src={councilLogo}
-                  alt="Student Council Logo"
-                  style={{
-                    height: '60px',
-                    width: 'auto',
-                    objectFit: 'contain'
-                  }}
-                />
-              </div>
               <h1 style={{
                 fontSize: '26px',
                 fontWeight: '600',
                 color: '#222222',
                 marginBottom: '8px',
-                letterSpacing: '-0.02em',
-                textAlign: 'center'
+                letterSpacing: '-0.02em'
               }}>
                 Welcome to VGU Elections
               </h1>
@@ -125,8 +95,7 @@ const VoterEntry = () => {
                 fontSize: '16px',
                 color: '#717171',
                 lineHeight: '1.5',
-                margin: 0,
-                textAlign: 'center'
+                margin: 0
               }}>
                 Please enter your details to begin voting
               </p>

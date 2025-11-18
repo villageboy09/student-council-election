@@ -1,3 +1,6 @@
+import vguLogo from '../assets/vgu.png';
+import councilLogo from '../assets/council.jpg';
+
 const Header = () => {
   return (
     <header style={{
@@ -20,21 +23,15 @@ const Header = () => {
           alignItems: 'center',
           flexShrink: 0
         }}>
-          <div style={{
-            width: '44px',
-            height: '44px',
-            background: '#004AAD',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontWeight: '700',
-            fontSize: '14px',
-            letterSpacing: '0.5px'
-          }}>
-            VGU
-          </div>
+          <img
+            src={vguLogo}
+            alt="VGU Logo"
+            style={{
+              height: '44px',
+              width: 'auto',
+              objectFit: 'contain'
+            }}
+          />
         </div>
 
         {/* Title - Center */}
@@ -63,21 +60,15 @@ const Header = () => {
           alignItems: 'center',
           flexShrink: 0
         }}>
-          <div style={{
-            width: '44px',
-            height: '44px',
-            background: '#FFD700',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#004AAD',
-            fontWeight: '700',
-            fontSize: '14px',
-            letterSpacing: '0.5px'
-          }}>
-            SC
-          </div>
+          <img
+            src={councilLogo}
+            alt="Student Council Logo"
+            style={{
+              height: '44px',
+              width: 'auto',
+              objectFit: 'contain'
+            }}
+          />
         </div>
       </div>
     </header>
