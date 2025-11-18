@@ -1,5 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { VoteProvider } from './context/VoteContext';
+import { AdminProvider } from './context/AdminContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminLogin from './pages/AdminLogin';
+import VotePanel from './pages/VotePanel';
 import VoterEntry from './pages/VoterEntry';
 import SelectionPage from './pages/SelectionPage';
 import ConfirmationPage from './pages/ConfirmationPage';
@@ -7,26 +11,54 @@ import ThankYouPage from './pages/ThankYouPage';
 
 function App() {
   return (
-    <VoteProvider>
-      <Router>
-        <Routes>
-          {/* Voter Entry Page */}
-          <Route path="/" element={<VoterEntry />} />
+    <AdminProvider>
+      <VoteProvider>
+        <Router>
+          <Routes>
+            {/* Admin Login */}
+            <Route path="/admin-login" element={<AdminLogin />} />
 
-          {/* Position Selection Pages */}
-          <Route path="/vote/:position" element={<SelectionPage />} />
+            {/* Admin Vote Panel - Protected */}
+            <Route path="/vote-panel" element={
+              <ProtectedRoute>
+                <VotePanel />
+              </ProtectedRoute>
+            } />
 
-          {/* Confirmation Page */}
-          <Route path="/vote/confirm" element={<ConfirmationPage />} />
+            {/* Voter Entry Page - Protected */}
+            <Route path="/" element={
+              <ProtectedRoute>
+                <VoterEntry />
+              </ProtectedRoute>
+            } />
 
-          {/* Thank You Page */}
-          <Route path="/thank-you" element={<ThankYouPage />} />
+            {/* Position Selection Pages - Protected */}
+            <Route path="/vote/:position" element={
+              <ProtectedRoute>
+                <SelectionPage />
+              </ProtectedRoute>
+            } />
 
-          {/* Catch all - redirect to home */}
-          <Route path="*" element={<VoterEntry />} />
-        </Routes>
-      </Router>
-    </VoteProvider>
+            {/* Confirmation Page - Protected */}
+            <Route path="/vote/confirm" element={
+              <ProtectedRoute>
+                <ConfirmationPage />
+              </ProtectedRoute>
+            } />
+
+            {/* Thank You Page - Protected */}
+            <Route path="/thank-you" element={
+              <ProtectedRoute>
+                <ThankYouPage />
+              </ProtectedRoute>
+            } />
+
+            {/* Catch all - redirect to admin login */}
+            <Route path="*" element={<AdminLogin />} />
+          </Routes>
+        </Router>
+      </VoteProvider>
+    </AdminProvider>
   );
 }
 
