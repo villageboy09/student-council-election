@@ -14,6 +14,11 @@ const SelectionPage = () => {
     voteData[position] || ''
   );
 
+  // Reset selection when position changes
+  useEffect(() => {
+    setSelectedCandidate(voteData[position] || '');
+  }, [position, voteData]);
+
   const positionFlow = [
     'president',
     'vice_president',
@@ -222,19 +227,11 @@ const SelectionPage = () => {
                       fontSize: '18px',
                       fontWeight: '600',
                       color: '#222222',
-                      marginBottom: '8px',
+                      marginBottom: '0',
                       letterSpacing: '-0.01em'
                     }}>
                       {candidate.name}
                     </h3>
-                    <p style={{
-                      fontSize: '14px',
-                      color: '#717171',
-                      lineHeight: '1.5',
-                      margin: 0
-                    }}>
-                      {candidate.description}
-                    </p>
                   </div>
                 </div>
               </motion.div>
