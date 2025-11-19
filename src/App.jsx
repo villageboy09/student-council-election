@@ -8,6 +8,7 @@ import VoterEntry from './pages/VoterEntry';
 import SelectionPage from './pages/SelectionPage';
 import ConfirmationPage from './pages/ConfirmationPage';
 import ThankYouPage from './pages/ThankYouPage';
+import PublicDashboard from './pages/PublicDashboard';
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
       <VoteProvider>
         <Router>
           <Routes>
+            {/* Public Dashboard */}
+            <Route path="/dashboard" element={<PublicDashboard />} />
+
             {/* Admin Login */}
             <Route path="/admin-login" element={<AdminLogin />} />
 
